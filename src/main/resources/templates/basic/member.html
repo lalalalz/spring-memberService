@@ -14,7 +14,7 @@
 <body>
 <div class="container">
     <div class="py-5 text-center">
-        <h2>회원 가입 폼</h2>
+        <h2>회원 상세 조회</h2>
     </div>
 
     <hr class="my-4">
@@ -50,18 +50,43 @@
 
     <hr class="my-4">
 
+    <div>권한</div>
+    <div th:each="authority : ${memberAuthority}" class="form-check form-check-inline">
+        <input type="radio"
+               th:field="${member.authority}"
+               th:value="${authority.name()}"
+               disabled>
+        <label th:for="${#ids.prev('authority')}"
+               th:text="${authority.description}"
+               class="form-check-label"></label>
+    </div>
+
+    <div>농장</div>
+    <div th:each="farm : ${#numbers.sequence(1, 4)}"
+         class="form-check form-check-inline">
+        <input type="checkbox"
+               th:field="${member.farms}"
+               th:value="${farm}"
+               class="form-check-input" disabled>
+        <label th:for="${#ids.prev('farms')}"
+               th:text="${farm}"
+               class="form-check-label"></label>
+    </div>
+
+    <hr class="my-4">
+
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
                     type="button"
                     onclick="location.href='edit.html'"
-                    th:onclick="|location.href='@{/basic/member/edit/{memberId}(memberId=${member.memberId})}'|">수정</button>
+                    th:onclick="|location.href='@{/edit/{memberId}(memberId=${member.memberId})}'|">수정</button>
         </div>
         <div class="col">
             <button class="w-100 btn btn-primary btn-lg"
                     type="button"
                     onclick="location.href='members.html'"
-                    th:onclick="|location.href='@{/basic/members}'|">목록으로</button>
+                    th:onclick="|location.href='@{/members}'|">목록으로</button>
         </div>
     </div>
 </div>

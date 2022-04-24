@@ -1,5 +1,6 @@
 package com.example.join.basic.member;
 
+import com.example.join.basic.form.MemberForm;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -24,11 +25,13 @@ public class MemberRepository {
         return new ArrayList<>(store.values());
     }
 
-    public void update(String memberId, Member memberParam) {
+    public void update(String memberId, MemberForm memberForm) {
         Member findMember = store.get(memberId);
-        findMember.setMemberName(memberParam.getMemberName());
-        findMember.setAge(memberParam.getAge());
-        findMember.setEmail(memberParam.getEmail());
+        findMember.setMemberName(memberForm.getMemberName());
+        findMember.setAge(memberForm.getAge());
+        findMember.setEmail(memberForm.getEmail());
+        findMember.setAuthority(memberForm.getAuthority());
+        findMember.setFarms(memberForm.getFarms());
     }
 
     public void clear() {
@@ -37,7 +40,7 @@ public class MemberRepository {
 
     @PostConstruct
     public void init() {
-        save(new Member("lalalalz", "1234", "진수", 29, "lalalalz@naver.com"));
-        save(new Member("mkjs0309", "5768", "민경", 19, "mkjs0309@gmail.com"));
+        save(new Member("lalalalz", "1234", "진수", 29, "lalalalz@naver.com", new Integer[]{1,2,3,4}, MemberAuthority.ADMIN));
+        save(new Member("mkjs0309", "5768", "민경", 19, "mkjs0309@gmail.com", new Integer[]{1,2,3,4}, MemberAuthority.USER));
     }
 }

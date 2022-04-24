@@ -19,10 +19,16 @@
 
     <div class="row">
         <div class="col">
-            <button class="btn btn-primary float-end"
+            <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='join.html'"
-                    th:onclick="|location.href='@{/basic/join}'|"
+                    th:onclick="|location.href='@{/join}'|"
                     type="button">회원 등록</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='login.html'"
+                    th:onclick="|location.href='@{/login}'|"
+                    type="button">로그아웃</button>
         </div>
     </div>
 
@@ -35,17 +41,17 @@
                 <th>아이디</th>
                 <th>이름</th>
                 <th>나이</th>
-                <th>이메일</th>
+                <th>권한</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="member : ${members}">
                 <td><a href="member.html"
-                    th:href="@{/basic/member/{memberId}(memberId=${member.memberId})}"
+                    th:href="@{/members/{memberId}(memberId=${member.memberId})}"
                     th:text="${member.memberId}"></a></td>
                 <td th:text="${member.memberName}" ></td>
                 <td th:text="${member.age}" ></td>
-                <td th:text="${member.email}" ></td>
+                <td th:text="${member.authority.description}" ></td>
             </tr>
             </tbody>
         </table>
